@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sidney Grunevald - Meu Site Pessoal</title>
+
+    <style>
+        /* Reset básico e fonte global */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Menu superior fixo */
+        header {
+            background-color: #2f3542;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 22px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+        }
+
+        /* Conteúdo principal */
+        main {
+            max-width: 900px;
+            margin: 100px auto 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #2f3542;
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        /* Formulário de contato */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        input, textarea {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
+
+        /* Responsividade para diversas telas */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cabeçalho com menu -->
+<header>
+    <h1>Sidney Grunevald</h1>
+    <nav>
+        <a href="#" onclick="mostrarPagina('sobre')">Sobre Mim</a>
+        <a href="#" onclick="mostrarPagina('formacao')">Formação</a>
+        <a href="#" onclick="mostrarPagina('portfolio')">Portfólio</a>
+        <a href="#" onclick="mostrarPagina('contato')">Contato</a>
+    </nav>
+</header>
+
+<!-- Conteúdo principal -->
+<main>
+    <!-- Sobre Mim -->
+    <div id="sobre" class="pagina">
+        <h2>Sobre Sidney Grunevald</h2>
+        <p>Olá! Me chamo Sidney Grunevald, sou apaixonado por tecnologia e games.</p>
+        <p>Gosto de explorar novas linguagens de programação, aprender sobre design e criar projetos que unem funcionalidade e estética.</p>
+    </div>
+
+    <!-- Formação -->
+    <div id="formacao" class="pagina" style="display:none;">
+        <h2>Formação Acadêmica e Idiomas</h2>
+        <p>Atualmente estou cursando Análise e Desenvolvimento de Sistemas, com foco em desenvolvimento Full-stack.</p>
+        <ul>
+            <li>Português: Nativo</li>
+            <li>Inglês: Intermediário</li>
+            <li>Espanhol: Básico</li>
+        </ul>
+    </div>
+
+    <!-- Seção Portfólio -->
+    <div id="portfolio" class="pagina" style="display:none;">
+        <h2>Portfólio</h2>
+        <p>Aqui estão alguns dos meus projetos:</p>
+        <ul>
+            <li><a href="Trabalho-Relatorio.pdf" target="_blank">Trabalho - Relatório (PDF)</a></li>
+            <li><a href="" target="_blank">ex</a></li>
+            <li><a href="" target="_blank">ex</a></li>
+        </ul>
+    </div>
+
+    <!-- Seção Contato -->
+    <div id="contato" class="pagina" style="display:none;">
+        <h2>Entre em Contato</h2>
+        <p>Preencha o formulário abaixo e retornarei em breve:</p>
+        <form>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+            <input type="email" id="email" placeholder="Seu email" required>
+            <textarea id="mensagem" rows="5" placeholder="Sua mensagem..." required></textarea>
+            <button type="button" onclick="enviarMensagem()">Enviar</button>
+        </form>
+    </div>
+</main>
+
+<!-- JavaScript para navegação -->
+<script>
+    // Função que exibe a página clicada e oculta as outras
+    function mostrarPagina(paginaId) {
+        const paginas = document.querySelectorAll('.pagina');
+        paginas.forEach(pagina => pagina.style.display = 'none');
+
+        const paginaAtiva = document.getElementById(paginaId);
+        if (paginaAtiva) {
+            paginaAtiva.style.display = 'block';
+        }
+    }
+
+    // Função que simula o envio do formulário
+    function enviarMensagem() {
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const mensagem = document.getElementById('mensagem').value.trim();
+
+        if (nome && email && mensagem) {
+            alert(`${nome}! Em breve retornarei seu contato.`);
+            document.getElementById('nome').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('mensagem').value = '';
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
+    }
+</script>
+
+</body>
+</html>
